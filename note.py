@@ -13,6 +13,9 @@ for sheet_name in excel_file.sheet_names:
     # タブ名を新しい列として追加
     df.insert(0, '種類', sheet_name)
     
+    # "写真" カラムを作成し、すべてのレコードに "test.png" を埋め込む
+    df['写真'] = 'test.png'
+    
     # リストにデータフレームを追加
     dfs.append(df)
 
