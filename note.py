@@ -1,25 +1,35 @@
 #%%
-import sqlite3
 import pandas as pd
 
-# データを定義します
-data = {
-    '名前': ['太郎', '花子', '次郎', '三郎', '四郎'],
-    '年齢': [25, 30, 35, 40, 45],
-    '性別': ['男性', '女性', '男性', '男性', '男性'],
-    '都道府県': ['東京', '大阪', '名古屋', '福岡', '札幌']
-}
+# Excelファイルの読み込み
+excel_file_path = 'グループ推奨品リスト.xlsx'
+excel_file = pd.ExcelFile(excel_file_path)
 
-# DataFrameを作成します
-df = pd.DataFrame(data)
+# タブごとにデータフレームを作成し、リストに追加
+dfs = []
+for sheet_name in excel_file.sheet_names:
+    df = excel_file.parse(sheet_name)
+    
+    # タブ名を新しい列として追加
+    df.insert(0, '種類', sheet_name)
+    
+    # リストにデータフレームを追加
+    dfs.append(df)
 
-# SQLite3データベースに接続します
-conn = sqlite3.connect('sample.db')
+# リスト内のデータフレームを結合
+final_df = pd.concat(dfs, ignore_index=True)
 
-# DataFrameをデータベースに保存します
-df.to_sql('persons', conn, index=False, if_exists='replace')
+# 結合したデータフレームを表示
+final_df
+# %%
+import sqlite3
+# SQLite3データベースに接続
+db_file_name = '単価データベース.db'
+conn = sqlite3.connect(db_file_name)
 
-# 接続を閉じます
+# データフレームをSQLite3データベースに保存
+final_df.to_sql('単価テーブル', conn, index=False, if_exists='replace')
+
+# 接続を閉じる
 conn.close()
-
 # %%
