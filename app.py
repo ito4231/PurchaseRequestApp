@@ -25,13 +25,15 @@ selected_product = st.selectbox('商品名を選択してください', filtered
 result_df = filtered_df[filtered_df['商品名'] == selected_product]
 
 # 必要なカラムのみを取得
-display_columns = ['メーカー', '品番', '単価', '出荷単位', '備考']
+display_columns = ['メーカー', '品番', '単価', '出荷単位', '備考',"写真"]
 result_table = result_df[display_columns]
 
 # 結果を表示
 st.table(result_table)
 # 写真パス
-image_path = result_df["写真"]
+image_path = str("test.png")
+
+st.caption(image_path)
 
 # 画像表示
 st.image(image_path, caption='選択された商品の写真', use_column_width=True)
