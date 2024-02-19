@@ -27,7 +27,7 @@ final_df
 # %%
 import sqlite3
 # SQLite3データベースに接続
-db_file_name = '単価データベース.db'
+db_file_name = 'データベース.db'
 conn = sqlite3.connect(db_file_name)
 
 # データフレームをSQLite3データベースに保存
