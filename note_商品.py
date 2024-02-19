@@ -31,7 +31,7 @@ db_file_name = 'データベース.db'
 conn = sqlite3.connect(db_file_name)
 
 # データフレームをSQLite3データベースに保存
-final_df.to_sql('単価テーブル', conn, index=False, if_exists='replace')
+final_df.to_sql('商品テーブル', conn, index=False, if_exists='replace')
 
 # 接続を閉じる
 conn.close()
