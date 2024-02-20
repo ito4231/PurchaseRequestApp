@@ -14,13 +14,16 @@ for sheet_name in excel_file.sheet_names:
     df.insert(0, '種類', sheet_name)
     
     # "写真" カラムを作成し、すべてのレコードに "test.png" を埋め込む
-    df['写真'] = 'test.png'
+    # df['写真'] = 'test.png'
     
     # リストにデータフレームを追加
     dfs.append(df)
 
 # リスト内のデータフレームを結合
 final_df = pd.concat(dfs, ignore_index=True)
+
+# 単価データは削除
+final_df.pop("単価")
 
 # 結合したデータフレームを表示
 final_df

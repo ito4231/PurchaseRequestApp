@@ -98,3 +98,5 @@ with tab2:
 
 # 接続を閉じる
 conn.close()
+
+# %%
